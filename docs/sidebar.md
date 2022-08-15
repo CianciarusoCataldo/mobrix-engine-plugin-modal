@@ -1,0 +1,9 @@
+- [Documentation](guide "MoBrix-engine-plugin-modal - documentation")
+- [Changelog](changelog "MoBrix-engine-plugin-modal - changelog")
+- **Links**
+- [Github](https://github.com/cianciarusocataldo/mobrix-engine-plugin-modal)
+- [NPM](https://www.npmjs.com/package/mobrix-engine-plugin-modal)
+- **MoBrix ecosystem**
+- [MoBrix-engine](https://github.com/cianciarusocataldo/mobrix-engine)
+- [MoBrix-ui](https://github.com/cianciarusocataldo/mobrix-ui)
+- [MoBrix-designer](https://github.com/cianciarusocataldo/mobrix-designer)

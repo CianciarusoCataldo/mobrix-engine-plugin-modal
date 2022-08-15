@@ -9,25 +9,7 @@
 
 <br>
 
-Manage your web app modal with [mobrix-engine system](https://github.com/CianciarusoCataldo/mobrix-engine)
-
-<br>
-
----
-
-## Summary
-
-- [Getting started](#getting-started)
-  - [Installation](#installation)
-  - [Usage](#usage)
-- [API](#api)
-  - [Config](#config)
-  - [Actions](#actions)
-  - [Selectors](#selectors)
-- [Integration with other plugins](#integration-with-other-plugins)
-- [Included libraries](#included-libraries)
-- [Authors](#authors)
-- [License](#license)
+Manage your web app modal with [Mobrix-engine system](https://github.com/CianciarusoCataldo/mobrix-engine)
 
 <br>
 
@@ -231,7 +213,7 @@ const customPlugin = () => ({
 
   <br>
 
-- Additionally, if you use [mobrix-engine-plugin-url-checker](https://github.com/CianciarusoCataldo/mobrix-engine-plugin-url-checker) too, you can open the modal directly from URL, with query parameters, by passing the `modal` parameter with the form type you want to open. Try it with [MoBrix-engine](https://github.com/CianciarusoCataldo/mobrix-engine) playground (look the query parameters) - https://cianciarusocataldo.github.io/mobrix-engine?modal=TestModal
+- Additionally, if you use [MoBrix-engine-plugin-url-checker](https://github.com/CianciarusoCataldo/mobrix-engine-plugin-url-checker) too, you can open the modal directly from URL, with query parameters, by passing the `modal` parameter with the form type you want to open. Try it with [MoBrix-engine](https://github.com/CianciarusoCataldo/mobrix-engine) playground (look the query parameters) - https://cianciarusocataldo.github.io/mobrix-engine?modal=TestModal
 
   <br>
 
