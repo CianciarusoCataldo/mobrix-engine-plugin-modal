@@ -1,15 +1,8 @@
 # MoBrix-engine-plugin-modal
 
-![NPM](https://img.shields.io/npm/l/mobrix-engine-plugin-modal?label=License&style=for-the-badge)
-![npm](https://img.shields.io/npm/v/mobrix-engine-plugin-modal?color=orange%20&label=Latest%20version&style=for-the-badge&logo=npm)
-![npm bundle size](https://img.shields.io/bundlephobia/min/mobrix-engine-plugin-modal?label=Package%20size&style=for-the-badge)
-![Maintenance](https://img.shields.io/maintenance/yes/2025?label=Maintained&style=for-the-badge)
-
----
-
 <br>
 
-Manage your web app modal with [Mobrix-engine system](https://github.com/CianciarusoCataldo/mobrix-engine)
+Manage your web app modal with [mobrix-engine system](https://github.com/CianciarusoCataldo/mobrix-engine)
 
 <br>
 
@@ -193,7 +186,7 @@ export const ModalDebugComponent = () => {
 
 ## Integration with other plugins
 
-- This plugin expose some fields to work with any other plugin. If you want to interact with it, using your custom plugin, add an `interaction` with `modal` plugin into you custom plugin. There you can add your callbacks to `modal` fields (check [config section](#config) for details). For example, to add a custom function to be called when modal is opened, inside the `format` function of your custom plugin:
+- This plugin expose some fields to work with any other plugin. If you want to interact with it, using your custom plugin, add an `interaction` with `mobrix-engine-modal` plugin into you custom plugin. There you can add your callbacks to `modal` fields (check [config section](#config) for details). For example, to add a custom function to be called when modal is opened, inside the `format` function of your custom plugin:
 
 ```tsx
 //Just a skeleton of a custom plugin that interacts with modal plugin
@@ -201,11 +194,14 @@ const customPlugin = () => ({
   // Custom plugin stuffs
 
   interactions: [
-    (modalConfig) => {
-      //Add the custom callback
-      modalConfig.onModalOpened.push(() => {
-        alert("Modal opened");
-      });
+    {
+      plugin: "mobrix-engine-modal",
+      effect: (modalConfig) => {
+        //Add the custom callback
+        modalConfig.onModalOpened.push(() => {
+          alert("Modal opened");
+        });
+      },
     },
   ],
 });
@@ -213,7 +209,7 @@ const customPlugin = () => ({
 
   <br>
 
-- Additionally, if you use [MoBrix-engine-plugin-url-checker](https://github.com/CianciarusoCataldo/mobrix-engine-plugin-url-checker) too, you can open the modal directly from URL, with query parameters, by passing the `modal` parameter with the form type you want to open. Try it with [MoBrix-engine](https://github.com/CianciarusoCataldo/mobrix-engine) playground (look the query parameters) - https://cianciarusocataldo.github.io/mobrix-engine?modal=TestModal
+- Additionally, if you use [mobrix-engine-plugin-url-checker](https://github.com/CianciarusoCataldo/mobrix-engine-plugin-url-checker) too, you can open the modal directly from URL, with query parameters, by passing the `modal` parameter with the form type you want to open. Try it with [MoBrix-engine](https://github.com/CianciarusoCataldo/mobrix-engine) playground (look the query parameters) - https://cianciarusocataldo.github.io/mobrix-engine?modal=TestModal
 
   <br>
 
@@ -223,7 +219,7 @@ const customPlugin = () => ({
 
 - [MoBrix-engine-types](https://github.com/CianciarusoCataldo/mobrix-engine-types) - to work easier with mobrix-engine system
 - [MoBrix-engine-tools](https://github.com/CianciarusoCataldo/mobrix-engine-tools) - to use mobrix-engine utils functions, to easily work with it
-- MoBrix-plugin-modal is written entirely with [Typescript](https://www.typescriptlang.org/)
+- This library is written entirely with [Typescript](https://www.typescriptlang.org/)
 
 <br>
 

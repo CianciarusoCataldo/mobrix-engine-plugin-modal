@@ -211,7 +211,7 @@ export const ModalDebugComponent = () => {
 
 ## Integration with other plugins
 
-- This plugin expose some fields to work with any other plugin. If you want to interact with it, using your custom plugin, add an `interaction` with `modal` plugin into you custom plugin. There you can add your callbacks to `modal` fields (check [config section](#config) for details). For example, to add a custom function to be called when modal is opened, inside the `format` function of your custom plugin:
+- This plugin expose some fields to work with any other plugin. If you want to interact with it, using your custom plugin, add an `interaction` with `mobrix-engine-modal` plugin into you custom plugin. There you can add your callbacks to `modal` fields (check [config section](#config) for details). For example, to add a custom function to be called when modal is opened, inside the `format` function of your custom plugin:
 
 ```tsx
 //Just a skeleton of a custom plugin that interacts with modal plugin
@@ -219,11 +219,14 @@ const customPlugin = () => ({
   // Custom plugin stuffs
 
   interactions: [
-    (modalConfig) => {
-      //Add the custom callback
-      modalConfig.onModalOpened.push(() => {
-        alert("Modal opened");
-      });
+    {
+      plugin: "mobrix-engine-modal",
+      effect: (modalConfig) => {
+        //Add the custom callback
+        modalConfig.onModalOpened.push(() => {
+          alert("Modal opened");
+        });
+      },
     },
   ],
 });
@@ -241,7 +244,7 @@ const customPlugin = () => ({
 
 - [MoBrix-engine-types](https://github.com/CianciarusoCataldo/mobrix-engine-types) - to work easier with mobrix-engine system
 - [MoBrix-engine-tools](https://github.com/CianciarusoCataldo/mobrix-engine-tools) - to use mobrix-engine utils functions, to easily work with it
-- MoBrix-plugin-modal is written entirely with [Typescript](https://www.typescriptlang.org/)
+- This library is written entirely with [Typescript](https://www.typescriptlang.org/)
 
 <br>
 

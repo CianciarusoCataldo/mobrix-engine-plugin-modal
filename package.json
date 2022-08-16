@@ -1,6 +1,6 @@
 {
   "name": "mobrix-engine-plugin-modal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Manage your web app modal with mobrix-engine system",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",

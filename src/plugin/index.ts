@@ -48,92 +48,95 @@ import { createMoBrixEnginePlugin } from "mobrix-engine-tools";
  *
  * @copyright Cataldo Cianciaruso 2022
  */
-const modalPlugin: ModalPlugin = createMoBrixEnginePlugin("modal", () => ({
-  field: (config) => {
-    const modalConfig = config.modal || {};
+const modalPlugin: ModalPlugin = createMoBrixEnginePlugin(
+  "mobrix-engine-modal",
+  () => ({
+    field: (config) => {
+      const modalConfig = config.modal || {};
 
-    return {
-      name: "modal",
-      content: {
-        onModalClose: modalConfig.onModalClose || [],
-        onModalOpen: modalConfig.onModalOpen || [],
-      },
-    };
-  },
-  reducer: (config) => ({
-    slice: "modal",
-    effects: modalReducer,
-    initialState,
-  }),
-  interactions: [
-    {
-      plugin: "urlChecker",
-      effect: (urlCheckerConfig) => {
-        urlCheckerConfig.queryParameters["modal"] = ({
-          urlParam,
-          config: inputConfig,
-          store,
-        }) => {
-          urlParam && store.dispatch(actions.openModal(urlParam));
-
-          return inputConfig;
-        };
-
-        urlCheckerConfig.after.push("modal");
-
-        return urlCheckerConfig;
-      },
-    },
-  ],
-  designerInteractions: [
-    {
-      plugin: "forms",
-      effect: (field, config) => {
-        field.getFormType = field.getFormType || getModalType;
-        field.getModalVisibility = field.getModalVisibility || isModalVisible;
-        field.onClose =
-          field.onClose ||
-          ((dispatch: MoBrixEngineDispatch) => {
-            dispatch(actions.closeModal());
-          });
-        return field;
-      },
-    },
-  ],
-  middlewares: (config) => {
-    const callBacks = {
-      onModalClose: (context) => {
-        config.modal?.onModalClose?.forEach((callback) => {
-          callback(context);
-        });
-      },
-      onModalOpen: (context) => {
-        config.modal?.onModalOpen?.forEach((callback) => {
-          callback(context);
-        });
-      },
-    };
-
-    return {
-      middlewares: [
-        (action, store) => {
-          const state = store.getState();
-
-          switch (action.type) {
-            case actions.openModal.type: {
-              callBacks.onModalOpen(state.modal.context);
-              break;
-            }
-
-            case actions.closeModal.type: {
-              callBacks.onModalClose(state.modal.context);
-              break;
-            }
-          }
+      return {
+        name: "modal",
+        content: {
+          onModalClose: modalConfig.onModalClose || [],
+          onModalOpen: modalConfig.onModalOpen || [],
         },
-      ],
-    };
-  },
-}));
+      };
+    },
+    reducer: (config) => ({
+      slice: "modal",
+      effects: modalReducer,
+      initialState,
+    }),
+    interactions: [
+      {
+        plugin: "mobrix-engine-url-checker",
+        effect: (urlCheckerConfig) => {
+          urlCheckerConfig.queryParameters["modal"] = ({
+            urlParam,
+            config: inputConfig,
+            store,
+          }) => {
+            urlParam && store.dispatch(actions.openModal(urlParam));
+
+            return inputConfig;
+          };
+
+          urlCheckerConfig.after.push("modal");
+
+          return urlCheckerConfig;
+        },
+      },
+    ],
+    designerInteractions: [
+      {
+        plugin: "mobrix-designer-forms",
+        effect: (field, config) => {
+          field.getFormType = field.getFormType || getModalType;
+          field.getModalVisibility = field.getModalVisibility || isModalVisible;
+          field.onClose =
+            field.onClose ||
+            ((dispatch: MoBrixEngineDispatch) => {
+              dispatch(actions.closeModal());
+            });
+          return field;
+        },
+      },
+    ],
+    middlewares: (config) => {
+      const callBacks = {
+        onModalClose: (context) => {
+          config.modal?.onModalClose?.forEach((callback) => {
+            callback(context);
+          });
+        },
+        onModalOpen: (context) => {
+          config.modal?.onModalOpen?.forEach((callback) => {
+            callback(context);
+          });
+        },
+      };
+
+      return {
+        middlewares: [
+          (action, store) => {
+            const state = store.getState();
+
+            switch (action.type) {
+              case actions.openModal.type: {
+                callBacks.onModalOpen(state.modal.context);
+                break;
+              }
+
+              case actions.closeModal.type: {
+                callBacks.onModalClose(state.modal.context);
+                break;
+              }
+            }
+          },
+        ],
+      };
+    },
+  })
+);
 
 export default modalPlugin;
